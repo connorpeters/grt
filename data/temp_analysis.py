@@ -817,36 +817,6 @@ else:
 
 st.title("Genesee River Navigability Dashboard")
 
-# Model info bar
-col_model, col_scenario, col_flow, col_water = st.columns(4)
-col_model.markdown(f"**Model:** {model_display}")
-col_scenario.markdown(f"**Scenario:** {scenario}")
-if flow_df is not None and not flow_df.empty:
-    col_flow.markdown("**Flow Data:** USGS Active")
-else:
-    col_flow.markdown("**Flow Data:** Not Available")
-
-# Water temperature status indicator
-if 'WaterStatus' in df.columns:
-    # Get recent status (last 7 days)
-    recent_status = df['WaterStatus'].tail(7)
-    status_counts = recent_status.value_counts()
-    dominant_status = status_counts.index[0] if len(status_counts) > 0 else "Unknown"
-
-    # Color-code the status
-    status_colors = {
-        'Warming': '🟢',
-        'Cooling': '🟡',
-        'Freezing': '🔵',
-        'Thawing': '🟠'
-    }
-    status_icon = status_colors.get(dominant_status, '⚪')
-    col_water.markdown(f"**Water Status:** {status_icon} {dominant_status}")
-else:
-    col_water.markdown("**Water Status:** N/A")
-
-st.markdown("---")
-
 # KPI Cards - Two rows
 k1, k2, k3, k4 = st.columns(4)
 k1.metric(
@@ -912,11 +882,12 @@ if max_ice is not None:
 
 
 # --- 6. TABS & CHARTS ---
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Timeline Analysis",
     "Seasonality Heatmap",
     "Annual Comparison",
-    "Model Comparison"
+    "Model Comparison",
+    "Weather Data"
 ])
 
 # --- TAB 1: TIMELINE ---
@@ -924,9 +895,21 @@ with tab1:
     st.subheader("Historical Timeline with Closure Zones")
     st.markdown("Zoom in to see specific events. **Red Backgrounds** indicate when the river is impassable.")
     
-    # Filter for performance
-    recent_years = 5
-    cutoff_date = datetime.now().year - recent_years
+    # Allow user to select time range
+    timeline_range = st.radio(
+        "Time Range:",
+        ["Last 5 Years", "Last 10 Years", "All Data"],
+        horizontal=True,
+        index=1
+    )
+
+    if timeline_range == "Last 5 Years":
+        cutoff_date = datetime.now().year - 5
+    elif timeline_range == "Last 10 Years":
+        cutoff_date = datetime.now().year - 10
+    else:
+        cutoff_date = start_year
+
     plot_df = df[df.index.year >= cutoff_date]
     
     fig_time = go.Figure()
@@ -1190,3 +1173,155 @@ with tab4:
 
     else:
         st.info("Click 'Run Model Comparison' to compare all available ice models.")
+
+# --- TAB 5: WEATHER DATA ---
+with tab5:
+    st.subheader("Live Weather Data from KROC")
+    st.markdown("""
+    Raw weather data pulled from **Rochester International Airport (KROC)** via the
+    [Meteostat](https://meteostat.net/) API. This data feeds all ice formation models.
+    """)
+
+    # Data freshness indicator
+    latest_date = raw_df.index.max()
+    days_old = (datetime.now() - latest_date).days
+    if days_old <= 2:
+        freshness = "🟢 Current"
+    elif days_old <= 7:
+        freshness = "🟡 Recent"
+    else:
+        freshness = "🔴 Stale"
+
+    col_fresh, col_range, col_points = st.columns(3)
+    col_fresh.metric("Data Freshness", freshness, f"Last: {latest_date.strftime('%Y-%m-%d')}")
+    col_range.metric("Date Range", f"{raw_df.index.min().strftime('%Y')} - {latest_date.strftime('%Y')}")
+    col_points.metric("Total Records", f"{len(raw_df):,}", "Daily observations")
+
+    st.markdown("---")
+
+    # Temperature chart
+    st.markdown("### Temperature History")
+    weather_years = st.slider(
+        "Years to display:",
+        min_value=1, max_value=min(25, datetime.now().year - start_year),
+        value=3,
+        key="weather_years"
+    )
+    weather_cutoff = datetime.now().year - weather_years
+    weather_plot_df = raw_df[raw_df.index.year >= weather_cutoff]
+
+    fig_temp = go.Figure()
+
+    # Add temperature range (min to max)
+    if 'tmin_f' in weather_plot_df.columns and 'tmax_f' in weather_plot_df.columns:
+        fig_temp.add_trace(go.Scatter(
+            x=weather_plot_df.index,
+            y=weather_plot_df['tmax_f'],
+            mode='lines',
+            name='Daily High',
+            line=dict(color='rgba(255,100,100,0.5)', width=1),
+        ))
+        fig_temp.add_trace(go.Scatter(
+            x=weather_plot_df.index,
+            y=weather_plot_df['tmin_f'],
+            mode='lines',
+            name='Daily Low',
+            line=dict(color='rgba(100,100,255,0.5)', width=1),
+            fill='tonexty',
+            fillcolor='rgba(180,180,220,0.3)'
+        ))
+
+    # Add average temperature
+    fig_temp.add_trace(go.Scatter(
+        x=weather_plot_df.index,
+        y=weather_plot_df['tavg_f'],
+        mode='lines',
+        name='Daily Average',
+        line=dict(color='black', width=1.5)
+    ))
+
+    # Freezing line
+    fig_temp.add_hline(y=32, line_dash="dash", line_color="blue",
+                       annotation_text="Freezing (32°F)")
+
+    fig_temp.update_layout(
+        height=400,
+        yaxis_title="Temperature (°F)",
+        hovermode="x unified",
+        legend=dict(orientation="h", yanchor="bottom", y=1.02)
+    )
+    st.plotly_chart(fig_temp, use_container_width=True)
+
+    # Wind and precipitation
+    col_wind, col_precip = st.columns(2)
+
+    with col_wind:
+        st.markdown("### Wind Speed")
+        fig_wind = go.Figure()
+        fig_wind.add_trace(go.Scatter(
+            x=weather_plot_df.index,
+            y=weather_plot_df['wspd_mph'],
+            mode='lines',
+            name='Wind Speed',
+            line=dict(color='teal', width=1)
+        ))
+        fig_wind.update_layout(
+            height=300,
+            yaxis_title="Wind Speed (mph)",
+            hovermode="x unified"
+        )
+        st.plotly_chart(fig_wind, use_container_width=True)
+
+    with col_precip:
+        st.markdown("### Precipitation")
+        fig_precip = go.Figure()
+        fig_precip.add_trace(go.Bar(
+            x=weather_plot_df.index,
+            y=weather_plot_df['prcp'],
+            name='Precipitation',
+            marker_color='steelblue'
+        ))
+        fig_precip.update_layout(
+            height=300,
+            yaxis_title="Precipitation (mm)",
+            hovermode="x unified"
+        )
+        st.plotly_chart(fig_precip, use_container_width=True)
+
+    # USGS Flow data if available
+    if flow_df is not None and not flow_df.empty:
+        st.markdown("### River Discharge (USGS)")
+        st.markdown("Live data from **USGS Station 04231600** (Genesee River at Ford St, Rochester)")
+
+        flow_plot_df = flow_df[flow_df.index.year >= weather_cutoff]
+        fig_flow = go.Figure()
+        fig_flow.add_trace(go.Scatter(
+            x=flow_plot_df.index,
+            y=flow_plot_df['discharge_cfs'],
+            mode='lines',
+            name='Discharge',
+            line=dict(color='darkblue', width=1),
+            fill='tozeroy',
+            fillcolor='rgba(0,0,139,0.2)'
+        ))
+
+        # Add median line
+        median_flow = flow_df['discharge_cfs'].median()
+        fig_flow.add_hline(y=median_flow, line_dash="dash", line_color="gray",
+                          annotation_text=f"Median: {median_flow:,.0f} cfs")
+
+        fig_flow.update_layout(
+            height=350,
+            yaxis_title="Discharge (cubic feet/sec)",
+            hovermode="x unified"
+        )
+        st.plotly_chart(fig_flow, use_container_width=True)
+
+    # Raw data table
+    st.markdown("### Raw Data Sample")
+    display_weather_cols = ['tavg_f', 'tmin_f', 'tmax_f', 'wspd_mph', 'prcp']
+    available_cols = [c for c in display_weather_cols if c in raw_df.columns]
+    st.dataframe(
+        raw_df[available_cols].sort_index(ascending=False).head(100),
+        height=300
+    )
