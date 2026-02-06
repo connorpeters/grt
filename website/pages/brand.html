@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GRT Brand Guidelines - The visual identity system for Genesee River Transit.">
+
+  <title>Brand Guidelines | Genesee River Transit</title>
+
+  <link rel="icon" type="image/png" href="../assets/images/grt-logo.png">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <style>
+    /* Brand page specific styles */
+    .brand-section {
+      padding: var(--space-4xl) 0;
+      border-bottom: 1px solid var(--grt-cream-dark);
+    }
+
+    .brand-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: var(--space-4xl);
+      align-items: start;
+    }
+
+    .brand-grid__label {
+      position: sticky;
+      top: calc(var(--header-height) + var(--space-xl));
+    }
+
+    .brand-grid__label h3 {
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--grt-teal);
+      margin-bottom: var(--space-sm);
+    }
+
+    .brand-grid__label p {
+      font-size: var(--text-sm);
+      color: var(--grt-gray);
+      line-height: 1.6;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .color-swatch {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .color-swatch__preview {
+      height: 100px;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-sm);
+    }
+
+    .color-swatch__info {
+      padding: var(--space-md);
+    }
+
+    .color-swatch__name {
+      font-family: var(--font-display);
+      font-weight: var(--weight-semibold);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-xs);
+    }
+
+    .color-swatch__hex {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grt-gray);
+    }
+
+    .type-specimen {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .type-specimen__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grt-gray);
+      margin-bottom: var(--space-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .type-scale {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .type-scale__item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: var(--space-xl);
+      align-items: baseline;
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--grt-cream-dark);
+    }
+
+    .type-scale__item:last-child {
+      border-bottom: none;
+    }
+
+    .type-scale__size {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grt-gray);
+    }
+
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-xl);
+    }
+
+    .component-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .component-card__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grt-gray);
+      margin-bottom: var(--space-lg);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .logo-showcase {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-xl);
+    }
+
+    .logo-card {
+      border-radius: var(--radius-lg);
+      padding: var(--space-3xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-card img {
+      max-width: 200px;
+    }
+
+    .logo-card--light {
+      background: var(--grt-cream-dark);
+    }
+
+    .logo-card--dark {
+      background: var(--grt-navy);
+    }
+
+    .spacing-demo {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .spacing-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .spacing-box__visual {
+      background: var(--grt-gold);
+      border-radius: var(--radius-sm);
+    }
+
+    .spacing-box__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grt-gray);
+    }
+
+    .icon-grid {
+      display: flex;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .icon-demo {
+      width: 56px;
+      height: 56px;
+      background: var(--grt-gold-pale);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--grt-navy);
+    }
+
+    .principle-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+
+    .principle-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-sm);
+      border-left: 3px solid var(--grt-gold);
+    }
+
+    .principle-card h4 {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-sm);
+    }
+
+    .principle-card p {
+      font-size: var(--text-sm);
+      color: var(--grt-gray);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      .brand-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+
+      .brand-grid__label {
+        position: static;
+      }
+
+      .logo-showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .principle-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <img src="../assets/images/grt-logo.png" alt="GRT Logo" class="nav__logo-img">
+        <div class="nav__logo-text">
+          Genesee River Transit
+          <span>Rochester, NY</span>
+        </div>
+      </a>
+
+      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav__links">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="vision.html" class="nav__link">The Vision</a>
+        <a href="routes.html" class="nav__link">Routes & Stops</a>
+        <a href="phases.html" class="nav__link">Project Phases</a>
+        <a href="faq.html" class="nav__link">FAQ</a>
+        <a href="support.html" class="btn btn--primary nav__cta">Support GRT</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero hero--centered" style="min-height: 50vh;">
+      <div class="hero__background">
+        <div style="width: 100%; height: 100%; background: var(--grt-navy);"></div>
+      </div>
+
+      <div class="container">
+        <div class="hero__content">
+          <span class="hero__eyebrow">Design System</span>
+          <h1 class="hero__title">Brand Guidelines</h1>
+          <p class="hero__subtitle">
+            The visual language of Genesee River Transit
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Principles -->
+    <section class="brand-section bg-white">
+      <div class="container">
+        <div class="brand-grid">
+          <div class="brand-grid__label">
+            <h3>Principles</h3>
+            <p>The core values that guide every design decision.</p>
+          </div>
+          <div>
+            <div class="principle-cards">
+              <div class="principle-card">
+                <h4>Effortless</h4>
+                <p>Make the complex feel simple. Transit should feel as natural as the river itself.</p>
+              </div>
+              <div class="principle-card">
+                <h4>Confident</h4>
+                <p>Bold, clear, decisive. We present solutions, not problems.</p>
+              </div>
+              <div class="principle-card">
+                <h4>Connected</h4>
+                <p>Everything flows together. People, places, and possibilities.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logo -->
+    <section class="brand-section">
+      <div class="container">
+        <div class="brand-grid">
+          <div class="brand-grid__label">
+            <h3>Logo</h3>
+            <p>The GRT emblem represents our multi-modal vision: water, air, and connection.</p>
+          </div>
+          <div>
+            <div class="logo-showcase">
+              <div class="logo-card logo-card--light">
+                <img src="../assets/images/grt-logo.png" alt="GRT Logo on light background">
+              </div>
+              <div class="logo-card logo-card--dark">
+                <img src="../assets/images/grt-logo.png" alt="GRT Logo on dark background">
+              </div>
+            </div>
+            <div style="margin-top: var(--space-xl); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg);">
+              <div>
+                <p class="type-specimen__label">Minimum Size</p>
+                <p style="font-size: var(--text-sm); color: var(--grt-charcoal);">48px width (digital)<br>0.5" width (print)</p>
+              </div>
+              <div>
+                <p class="type-specimen__label">Clear Space</p>
+                <p style="font-size: var(--text-sm); color: var(--grt-charcoal);">25% of logo width on all sides</p>
+              </div>
+              <div>
+                <p class="type-specimen__label">File Format</p>
+                <p style="font-size: var(--text-sm); color: var(--grt-charcoal);">PNG with transparency</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colors -->
+    <section class="brand-section bg-white">
+      <div class="container">
+        <div class="brand-grid">
+          <div class="brand-grid__label">
+            <h3>Color Palette</h3>
+            <p>A sophisticated palette inspired by the river, the city, and the golden light of possibility.</p>
+          </div>
+          <div>
+            <p class="type-specimen__label" style="margin-bottom: var(--space-lg);">Primary</p>
+            <div class="color-grid" style="margin-bottom: var(--space-2xl);">
+              <div class="color-swatch">
+                <div class="color-swatch__preview" style="background: var(--grt-navy);">
+                </div>
+                <div class="color-swatch__info">
+                  <div class="color-swatch__name">Navy</div>
+                  <div class="color-swatch__hex">#0f2744</div>
+                </div>
+              </div>
+              <div class="color-swatch">
+                <div class="color-swatch__preview" style="background: var(--grt-gold);">
+                </div>
+                <div class="color-swatch__info">
+                  <div class="color-swatch__name">Gold</div>
+                  <div class="color-swatch__hex">#c9a227</div>
+                </div>
+              </div>
+              <div class="color-swatch">
+                <div class="color-swatch__preview" style="background: var(--grt-cream);">
+                </div>
+                <div class="color-swatch__info">
+                  <div class="color-swatch__name">Cream</div>
+                  <div class="color-swatch__hex">#faf8f3</div>
+                </div>
+              </div>
+            </div>
+
+            <p class="type-specimen__label" style="margin-bottom: var(--space-lg);">Secondary</p>
+            <div class="color-grid" style="margin-bottom: var(--space-2xl);">
+              <div class="color-swatch">
+                <div class="color-swatch__preview" style="background: var(--grt-teal);">
+                </div>
+                <div class="color-swatch__info">
+                  <div class="color-swatch__name">Teal</div>
+                  <div class="color-swatch__hex">#2d6e6e</div>
+                </div>
+              </div>
+              <div class="color-swatch">
+                <div class="color-swatch__preview" style="background: var(--grt-river-blue);">
+                </div>
+                <div class="color-swatch__info">
+                  <div class="color-swatch__name">River Blue</div>
+                  <div class="color-swatch__hex">#4a7c9b</div>
+                </div>
+              </div>
+              <div class="color-swatch">
+                <div class="color-swatch__preview" style="background: var(--grt-gold-pale);">
+                </div>
+                <div class="color-swatch__info">
+                  <div class="color-swatch__name">Gold Pale</div>
+                  <div class="color-swatch__hex">#f5e6b8</div>
+                </div>
+              </div>
+            </div>
+
+            <p class="type-specimen__label" style="margin-bottom: var(--space-lg);">Neutral</p>
+            <div class="color-grid">
+              <div class="color-swatch">
+                <div class="color-swatch__preview" style="background: var(--grt-charcoal);">
+                </div>
+                <div class="color-swatch__info">
+                  <div class="color-swatch__name">Charcoal</div>
+                  <div class="color-swatch__hex">#2c2c2c</div>
+                </div>
+              </div>
+              <div class="color-swatch">
+                <div class="color-swatch__preview" style="background: var(--grt-gray);">
+                </div>
+                <div class="color-swatch__info">
+                  <div class="color-swatch__name">Gray</div>
+                  <div class="color-swatch__hex">#6b6b6b</div>
+                </div>
+              </div>
+              <div class="color-swatch">
+                <div class="color-swatch__preview" style="background: var(--grt-gray-light);">
+                </div>
+                <div class="color-swatch__info">
+                  <div class="color-swatch__name">Gray Light</div>
+                  <div class="color-swatch__hex">#a8a8a8</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="brand-section">
+      <div class="container">
+        <div class="brand-grid">
+          <div class="brand-grid__label">
+            <h3>Typography</h3>
+            <p>Modern, geometric typefaces that balance confidence with approachability.</p>
+          </div>
+          <div>
+            <!-- Display Font -->
+            <div class="type-specimen">
+              <p class="type-specimen__label">Display — Outfit</p>
+              <p style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--weight-semibold); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: var(--space-md);">
+                Making the impossible feel easy.
+              </p>
+              <p style="font-size: var(--text-sm); color: var(--grt-gray);">
+                Used for headlines, display text, and UI elements. Geometric yet friendly, with excellent readability at all sizes.
+              </p>
+            </div>
+
+            <!-- Body Font -->
+            <div class="type-specimen">
+              <p class="type-specimen__label">Body — DM Sans</p>
+              <p style="font-family: var(--font-body); font-size: var(--text-lg); line-height: 1.7; margin-bottom: var(--space-md);">
+                The Genesee River has shaped Rochester's history. Now it can shape our future. At 200 feet wide and 13 feet deep, our river is a natural transit corridor waiting to be activated.
+              </p>
+              <p style="font-size: var(--text-sm); color: var(--grt-gray);">
+                Used for body text, descriptions, and longer-form content. Optimized for comfortable reading.
+              </p>
+            </div>
+
+            <!-- Mono Font -->
+            <div class="type-specimen">
+              <p class="type-specimen__label">Mono — JetBrains Mono</p>
+              <p style="font-family: var(--font-mono); font-size: var(--text-base); margin-bottom: var(--space-md);">
+                20 min · 7 stops · 10,000 daily rides
+              </p>
+              <p style="font-size: var(--text-sm); color: var(--grt-gray);">
+                Used for data, statistics, labels, and technical information.
+              </p>
+            </div>
+
+            <!-- Type Scale -->
+            <div style="margin-top: var(--space-3xl);">
+              <p class="type-specimen__label" style="margin-bottom: var(--space-xl);">Type Scale</p>
+              <div class="type-scale">
+                <div class="type-scale__item">
+                  <span class="type-scale__size">5XL</span>
+                  <span style="font-family: var(--font-display); font-size: var(--text-5xl); font-weight: var(--weight-semibold); letter-spacing: -0.03em;">Display</span>
+                </div>
+                <div class="type-scale__item">
+                  <span class="type-scale__size">4XL</span>
+                  <span style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--weight-semibold); letter-spacing: -0.03em;">Heading 1</span>
+                </div>
+                <div class="type-scale__item">
+                  <span class="type-scale__size">3XL</span>
+                  <span style="font-family: var(--font-display); font-size: var(--text-3xl); font-weight: var(--weight-medium); letter-spacing: -0.02em;">Heading 2</span>
+                </div>
+                <div class="type-scale__item">
+                  <span class="type-scale__size">2XL</span>
+                  <span style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--weight-medium);">Heading 3</span>
+                </div>
+                <div class="type-scale__item">
+                  <span class="type-scale__size">XL</span>
+                  <span style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: var(--weight-medium);">Heading 4</span>
+                </div>
+                <div class="type-scale__item">
+                  <span class="type-scale__size">LG</span>
+                  <span style="font-family: var(--font-body); font-size: var(--text-lg);">Lead paragraph</span>
+                </div>
+                <div class="type-scale__item">
+                  <span class="type-scale__size">BASE</span>
+                  <span style="font-family: var(--font-body); font-size: var(--text-base);">Body text</span>
+                </div>
+                <div class="type-scale__item">
+                  <span class="type-scale__size">SM</span>
+                  <span style="font-family: var(--font-body); font-size: var(--text-sm);">Small text</span>
+                </div>
+                <div class="type-scale__item">
+                  <span class="type-scale__size">XS</span>
+                  <span style="font-family: var(--font-body); font-size: var(--text-xs);">Caption</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Components -->
+    <section class="brand-section bg-white">
+      <div class="container">
+        <div class="brand-grid">
+          <div class="brand-grid__label">
+            <h3>Components</h3>
+            <p>Reusable building blocks that maintain consistency across the experience.</p>
+          </div>
+          <div>
+            <!-- Buttons -->
+            <p class="type-specimen__label" style="margin-bottom: var(--space-lg);">Buttons</p>
+            <div class="component-grid" style="margin-bottom: var(--space-3xl);">
+              <div class="component-card">
+                <p class="component-card__label">Primary</p>
+                <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+                  <a href="#" class="btn btn--primary">Get Started</a>
+                  <a href="#" class="btn btn--primary btn--lg">Large Button</a>
+                </div>
+              </div>
+              <div class="component-card">
+                <p class="component-card__label">Secondary</p>
+                <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+                  <a href="#" class="btn btn--secondary">Learn More</a>
+                  <a href="#" class="btn btn--secondary btn--lg">Large Button</a>
+                </div>
+              </div>
+              <div class="component-card" style="background: var(--grt-navy);">
+                <p class="component-card__label" style="color: var(--grt-gold);">Light (on dark)</p>
+                <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+                  <a href="#" class="btn btn--light">Explore</a>
+                  <a href="#" class="btn btn--ghost">Ghost</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cards -->
+            <p class="type-specimen__label" style="margin-bottom: var(--space-lg);">Cards</p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); margin-bottom: var(--space-3xl);">
+              <div class="card">
+                <div style="height: 120px; background: linear-gradient(135deg, var(--grt-teal) 0%, var(--grt-navy) 100%);"></div>
+                <div class="card__content">
+                  <span class="card__tag">Water Transit</span>
+                  <h4 class="card__title">Phase One</h4>
+                  <p class="card__description">Launch water taxi service connecting RIT to downtown.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div style="height: 120px; background: linear-gradient(135deg, var(--grt-river-blue) 0%, var(--grt-teal) 100%);"></div>
+                <div class="card__content">
+                  <span class="card__tag">Aerial</span>
+                  <h4 class="card__title">Phase Two</h4>
+                  <p class="card__description">Gondola lift bypassing the waterfalls.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div style="height: 120px; background: linear-gradient(135deg, var(--grt-sky) 0%, var(--grt-river-blue) 100%);"></div>
+                <div class="card__content">
+                  <span class="card__tag">Expansion</span>
+                  <h4 class="card__title">Phase Three</h4>
+                  <p class="card__description">Extend service to Charlotte and Lake Ontario.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section Headers -->
+            <p class="type-specimen__label" style="margin-bottom: var(--space-lg);">Section Headers</p>
+            <div style="background: var(--grt-cream); padding: var(--space-2xl); border-radius: var(--radius-md); margin-bottom: var(--space-3xl);">
+              <div class="section-header" style="margin-bottom: 0;">
+                <span class="section-header__eyebrow">The Opportunity</span>
+                <h2 class="section-header__title">A River Runs Through It</h2>
+                <p class="section-header__description">
+                  The Genesee River has shaped Rochester's history. Now it can shape our future.
+                </p>
+              </div>
+            </div>
+
+            <!-- Stats -->
+            <p class="type-specimen__label" style="margin-bottom: var(--space-lg);">Statistics</p>
+            <div style="background: var(--grt-navy); padding: var(--space-2xl); border-radius: var(--radius-md); display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-xl); text-align: center;">
+              <div>
+                <div style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--weight-semibold); color: var(--grt-gold); margin-bottom: var(--space-xs);">20</div>
+                <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grt-gray-light); text-transform: uppercase; letter-spacing: 0.05em;">Minutes</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--weight-semibold); color: var(--grt-gold); margin-bottom: var(--space-xs);">7</div>
+                <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grt-gray-light); text-transform: uppercase; letter-spacing: 0.05em;">Stops</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--weight-semibold); color: var(--grt-gold); margin-bottom: var(--space-xs);">10k</div>
+                <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grt-gray-light); text-transform: uppercase; letter-spacing: 0.05em;">Daily Rides</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--weight-semibold); color: var(--grt-gold); margin-bottom: var(--space-xs);">6</div>
+                <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grt-gray-light); text-transform: uppercase; letter-spacing: 0.05em;">Min Wait</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spacing -->
+    <section class="brand-section">
+      <div class="container">
+        <div class="brand-grid">
+          <div class="brand-grid__label">
+            <h3>Spacing</h3>
+            <p>Consistent spacing creates rhythm and hierarchy throughout the design.</p>
+          </div>
+          <div>
+            <div class="spacing-demo">
+              <div class="spacing-box">
+                <div class="spacing-box__visual" style="width: 4px; height: 4px;"></div>
+                <span class="spacing-box__label">XS · 4px</span>
+              </div>
+              <div class="spacing-box">
+                <div class="spacing-box__visual" style="width: 8px; height: 8px;"></div>
+                <span class="spacing-box__label">SM · 8px</span>
+              </div>
+              <div class="spacing-box">
+                <div class="spacing-box__visual" style="width: 16px; height: 16px;"></div>
+                <span class="spacing-box__label">MD · 16px</span>
+              </div>
+              <div class="spacing-box">
+                <div class="spacing-box__visual" style="width: 24px; height: 24px;"></div>
+                <span class="spacing-box__label">LG · 24px</span>
+              </div>
+              <div class="spacing-box">
+                <div class="spacing-box__visual" style="width: 32px; height: 32px;"></div>
+                <span class="spacing-box__label">XL · 32px</span>
+              </div>
+              <div class="spacing-box">
+                <div class="spacing-box__visual" style="width: 48px; height: 48px;"></div>
+                <span class="spacing-box__label">2XL · 48px</span>
+              </div>
+              <div class="spacing-box">
+                <div class="spacing-box__visual" style="width: 64px; height: 64px;"></div>
+                <span class="spacing-box__label">3XL · 64px</span>
+              </div>
+              <div class="spacing-box">
+                <div class="spacing-box__visual" style="width: 96px; height: 96px;"></div>
+                <span class="spacing-box__label">4XL · 96px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Voice & Tone -->
+    <section class="brand-section bg-white">
+      <div class="container">
+        <div class="brand-grid">
+          <div class="brand-grid__label">
+            <h3>Voice & Tone</h3>
+            <p>How we communicate shapes how people feel about the GRT.</p>
+          </div>
+          <div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2xl);">
+              <div>
+                <h4 style="color: var(--grt-teal); font-size: var(--text-lg); margin-bottom: var(--space-lg);">We are</h4>
+                <ul style="list-style: none; padding: 0;">
+                  <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--grt-cream-dark); font-size: var(--text-base);">
+                    <strong>Confident</strong> — We believe in this vision
+                  </li>
+                  <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--grt-cream-dark); font-size: var(--text-base);">
+                    <strong>Clear</strong> — We explain simply
+                  </li>
+                  <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--grt-cream-dark); font-size: var(--text-base);">
+                    <strong>Local</strong> — We know Rochester
+                  </li>
+                  <li style="padding: var(--space-sm) 0; font-size: var(--text-base);">
+                    <strong>Practical</strong> — We focus on what works
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 style="color: var(--grt-error); font-size: var(--text-lg); margin-bottom: var(--space-lg);">We avoid</h4>
+                <ul style="list-style: none; padding: 0;">
+                  <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--grt-cream-dark); font-size: var(--text-base); color: var(--grt-gray);">
+                    "Revolutionary" / "Game-changing"
+                  </li>
+                  <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--grt-cream-dark); font-size: var(--text-base); color: var(--grt-gray);">
+                    Tech jargon and buzzwords
+                  </li>
+                  <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--grt-cream-dark); font-size: var(--text-base); color: var(--grt-gray);">
+                    Over-promising timelines
+                  </li>
+                  <li style="padding: var(--space-sm) 0; font-size: var(--text-base); color: var(--grt-gray);">
+                    Talking down to the reader
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="margin-top: var(--space-3xl); background: var(--grt-cream); padding: var(--space-xl); border-radius: var(--radius-md);">
+              <p class="type-specimen__label" style="margin-bottom: var(--space-md);">Example</p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl);">
+                <div>
+                  <p style="font-size: var(--text-sm); color: var(--grt-error); margin-bottom: var(--space-sm); font-weight: var(--weight-medium);">Instead of:</p>
+                  <p style="font-size: var(--text-sm); color: var(--grt-gray); font-style: italic;">"Our revolutionary transit solution leverages cutting-edge technology to transform the urban mobility landscape."</p>
+                </div>
+                <div>
+                  <p style="font-size: var(--text-sm); color: var(--grt-teal); margin-bottom: var(--space-sm); font-weight: var(--weight-medium);">Write:</p>
+                  <p style="font-size: var(--text-sm); color: var(--grt-charcoal);">"Water taxis on the Genesee can get you from RIT to downtown in 20 minutes—faster than driving at rush hour."</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Downloads -->
+    <section class="brand-section">
+      <div class="container">
+        <div class="brand-grid">
+          <div class="brand-grid__label">
+            <h3>Downloads</h3>
+            <p>Assets for partners, press, and community use.</p>
+          </div>
+          <div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg);">
+              <div style="background: white; border-radius: var(--radius-md); padding: var(--space-xl); text-align: center; box-shadow: var(--shadow-sm);">
+                <div style="width: 64px; height: 64px; margin: 0 auto var(--space-md); background: var(--grt-cream-dark); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="var(--grt-navy)" stroke-width="1.5" style="width: 28px; height: 28px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                  </svg>
+                </div>
+                <h5 style="font-size: var(--text-sm); margin-bottom: var(--space-xs);">Logo Pack</h5>
+                <p style="font-size: var(--text-xs); color: var(--grt-gray);">PNG, SVG formats</p>
+              </div>
+              <div style="background: white; border-radius: var(--radius-md); padding: var(--space-xl); text-align: center; box-shadow: var(--shadow-sm);">
+                <div style="width: 64px; height: 64px; margin: 0 auto var(--space-md); background: var(--grt-cream-dark); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="var(--grt-navy)" stroke-width="1.5" style="width: 28px; height: 28px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" />
+                  </svg>
+                </div>
+                <h5 style="font-size: var(--text-sm); margin-bottom: var(--space-xs);">Color Palette</h5>
+                <p style="font-size: var(--text-xs); color: var(--grt-gray);">ASE, CSS variables</p>
+              </div>
+              <div style="background: white; border-radius: var(--radius-md); padding: var(--space-xl); text-align: center; box-shadow: var(--shadow-sm);">
+                <div style="width: 64px; height: 64px; margin: 0 auto var(--space-md); background: var(--grt-cream-dark); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="var(--grt-navy)" stroke-width="1.5" style="width: 28px; height: 28px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                </div>
+                <h5 style="font-size: var(--text-sm); margin-bottom: var(--space-xs);">Brand PDF</h5>
+                <p style="font-size: var(--text-xs); color: var(--grt-gray);">Full guidelines</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <img src="../assets/images/grt-logo.png" alt="GRT Logo" class="footer__logo-img">
+            <span class="footer__logo-text">Genesee River Transit</span>
+          </div>
+          <p class="footer__tagline">
+            By the River. By the Air. By the Lake. By the Sea.
+          </p>
+          <p class="footer__description">
+            A proposal for modern, multi-modal transit connecting Rochester
+            along the natural corridor of the Genesee River.
+          </p>
+        </div>
+
+        <div class="footer__column">
+          <h5>Explore</h5>
+          <ul>
+            <li><a href="vision.html">The Vision</a></li>
+            <li><a href="routes.html">Routes & Stops</a></li>
+            <li><a href="phases.html">Project Phases</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__column">
+          <h5>Learn More</h5>
+          <ul>
+            <li><a href="about.html">About the Project</a></li>
+            <li><a href="economics.html">Economics</a></li>
+            <li><a href="comparisons.html">Transit Comparisons</a></li>
+            <li><a href="news.html">News & Updates</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__column">
+          <h5>Get Involved</h5>
+          <ul>
+            <li><a href="support.html">Support GRT</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="press.html">Press Kit</a></li>
+            <li><a href="brand.html">Brand Guidelines</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">
+          &copy; 2025 Genesee River Transit. A community proposal for Rochester, NY.
+        </p>
+        <div class="footer__social">
+          <a href="#" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

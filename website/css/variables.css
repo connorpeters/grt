@@ -1,0 +1,101 @@
+/* ============================================
+   GRT Brand Variables
+   Genesee River Transit Design System
+   ============================================ */
+
+:root {
+  /* Primary Colors - Extracted from logo */
+  --grt-navy: #0f2744;
+  --grt-navy-light: #1a3a5c;
+  --grt-gold: #c9a227;
+  --grt-gold-light: #d4b84a;
+  --grt-gold-pale: #f5e6b8;
+
+  /* Accent Colors */
+  --grt-teal: #2d6e6e;
+  --grt-teal-light: #3d8a8a;
+  --grt-river-blue: #4a7c9b;
+  --grt-sky: #87b4c9;
+
+  /* Neutral Colors */
+  --grt-cream: #faf8f3;
+  --grt-cream-dark: #f0ebe0;
+  --grt-charcoal: #2c2c2c;
+  --grt-gray: #6b6b6b;
+  --grt-gray-light: #a8a8a8;
+
+  /* Semantic Colors */
+  --grt-success: #3d8a8a;
+  --grt-warning: #d4b84a;
+  --grt-error: #c44536;
+
+  /* Typography */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+
+  /* Font Sizes - Fluid Typography */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  --text-3xl: clamp(1.875rem, 1.4rem + 2.4vw, 2.5rem);
+  --text-4xl: clamp(2.25rem, 1.5rem + 3.75vw, 3.5rem);
+  --text-5xl: clamp(3rem, 2rem + 5vw, 5rem);
+
+  /* Font Weights */
+  --weight-light: 300;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  /* Layout */
+  --max-width: 1200px;
+  --max-width-narrow: 800px;
+  --max-width-wide: 1400px;
+  --header-height: 80px;
+
+  /* Borders & Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --border-thin: 1px solid var(--grt-gold);
+  --border-subtle: 1px solid rgba(201, 162, 39, 0.3);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 39, 68, 0.08);
+  --shadow-md: 0 4px 12px rgba(15, 39, 68, 0.12);
+  --shadow-lg: 0 8px 30px rgba(15, 39, 68, 0.16);
+  --shadow-xl: 0 20px 60px rgba(15, 39, 68, 0.2);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  --transition-glacial: 800ms ease;
+}
+
+/* Dark mode overrides (for future use) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --grt-bg-primary: var(--grt-navy);
+    --grt-bg-secondary: var(--grt-navy-light);
+    --grt-text-primary: var(--grt-cream);
+    --grt-text-secondary: var(--grt-gray-light);
+  }
+}
